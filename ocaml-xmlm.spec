@@ -2,15 +2,15 @@
 # Conditional build:
 %bcond_without	opt		# build opt
 
-%define		pkgname	xmlm
+%define		module	xmlm
 %define		debug_package	%{nil}
 Summary:	OCaml xml manipulation module
-Name:		ocaml-%{pkgname}
+Name:		ocaml-%{module}
 Version:	1.1.1
 Release:	1
 License:	BSD
 Group:		Libraries
-Source0:	http://erratique.ch/software/xmlm/releases/%{pkgname}-%{version}.tbz
+Source0:	http://erratique.ch/software/xmlm/releases/%{module}-%{version}.tbz
 # Source0-md5:	357025dd1a9fc87b6e50ac21eb0eb2b1
 URL:		http://erratique.ch/software/xmlm
 BuildRequires:	ocaml >= 3.10
@@ -32,7 +32,6 @@ używających tej biblioteki.
 Summary:	xmlm binding for OCaml - development part
 Summary(pl.UTF-8):	Wiązania xmlm dla OCamla - cześć programistyczna
 Group:		Development/Libraries
-#Requires:	%{name} = %{version}-%{release}
 %requires_eq	ocaml
 
 %description devel
@@ -44,7 +43,7 @@ Pakiet ten zawiera pliki niezbędne do tworzenia programów używających
 tej biblioteki.
 
 %prep
-%setup -q -n %{pkgname}-%{version}
+%setup -q -n %{module}-%{version}
 
 %build
 ocaml setup.ml -configure
@@ -52,16 +51,16 @@ ocaml setup.ml -build
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_libdir}/ocaml/{xmlm,stublibs}
-install _build/src/*.cm[ixa]* _build/src/*.a $RPM_BUILD_ROOT%{_libdir}/ocaml/xmlm
+install -d $RPM_BUILD_ROOT%{_libdir}/ocaml/{%{module},stublibs}
+install _build/src/*.cm[ixa]* _build/src/*.a $RPM_BUILD_ROOT%{_libdir}/ocaml/%{module}
 
-install -d $RPM_BUILD_ROOT%{_libdir}/ocaml/site-lib/xmlm
-cat > $RPM_BUILD_ROOT%{_libdir}/ocaml/site-lib/xmlm/META <<EOF
+install -d $RPM_BUILD_ROOT%{_libdir}/ocaml/site-lib/%{module}
+cat > $RPM_BUILD_ROOT%{_libdir}/ocaml/site-lib/%{module}/META <<EOF
 requires = ""
 version = "%{version}"
-directory = "+xmlm"
-archive(byte) = "xmlm.cma"
-archive(native) = "xmlm.cmxa"
+directory = "+%{module}"
+archive(byte) = "%{module}.cma"
+archive(native) = "%{module}.cmxa"
 linkopts = ""
 EOF
 
@@ -71,7 +70,7 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %doc README CHANGES src/*.mli
-%dir %{_libdir}/ocaml/xmlm
-%{_libdir}/ocaml/xmlm/*.cm[ixa]*
-%{_libdir}/ocaml/xmlm/*.a
-%{_libdir}/ocaml/site-lib/xmlm
+%dir %{_libdir}/ocaml/%{module}
+%{_libdir}/ocaml/%{module}/*.cm[ixa]*
+%{_libdir}/ocaml/%{module}/*.a
+%{_libdir}/ocaml/site-lib/%{module}
