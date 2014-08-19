@@ -6,12 +6,12 @@
 %define		debug_package	%{nil}
 Summary:	OCaml xml manipulation module
 Name:		ocaml-%{module}
-Version:	1.1.1
+Version:	1.2.0
 Release:	1
 License:	BSD
 Group:		Libraries
 Source0:	http://erratique.ch/software/xmlm/releases/%{module}-%{version}.tbz
-# Source0-md5:	357025dd1a9fc87b6e50ac21eb0eb2b1
+# Source0-md5:	7e6d3363c2395d84274f1b480e4b6003
 URL:		http://erratique.ch/software/xmlm
 BuildRequires:	ocaml >= 3.10
 BuildRequires:	ocaml-findlib >= 1.4
