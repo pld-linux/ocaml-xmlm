@@ -46,8 +46,7 @@ tej biblioteki.
 %setup -q -n %{module}-%{version}
 
 %build
-ocaml setup.ml -configure
-ocaml setup.ml -build
+./pkg/build true
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -69,7 +68,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc README CHANGES src/*.mli
+%doc README.md CHANGES.md src/*.mli
 %dir %{_libdir}/ocaml/%{module}
 %{_libdir}/ocaml/%{module}/*.cm[ixa]*
 %{_libdir}/ocaml/%{module}/*.a
