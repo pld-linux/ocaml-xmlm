@@ -1,6 +1,11 @@
 #
 # Conditional build:
-%bcond_without	opt		# build opt
+%bcond_without	ocaml_opt	# skip building native optimized binaries (bytecode is always built)
+
+# not yet available on x32 (ocaml 4.02.1), remove when upstream will support it
+%ifnarch %{ix86} %{x8664} arm aarch64 ppc sparc sparcv9
+%undefine	with_ocaml_opt
+%endif
 
 %define		module	xmlm
 %define		debug_package	%{nil}
@@ -46,12 +51,12 @@ tej biblioteki.
 %setup -q -n %{module}-%{version}
 
 %build
-./pkg/build true
+./pkg/build %{?with_ocaml_opt:true} %{!?with_ocaml_opt:false}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_libdir}/ocaml/{%{module},stublibs}
-install _build/src/*.cm[ixa]* _build/src/*.a $RPM_BUILD_ROOT%{_libdir}/ocaml/%{module}
+install _build/src/*.cm[ixa]* %{?with_ocaml_opt:_build/src/*.a} $RPM_BUILD_ROOT%{_libdir}/ocaml/%{module}
 
 install -d $RPM_BUILD_ROOT%{_libdir}/ocaml/site-lib/%{module}
 cat > $RPM_BUILD_ROOT%{_libdir}/ocaml/site-lib/%{module}/META <<EOF
@@ -70,6 +75,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README.md CHANGES.md src/*.mli
 %dir %{_libdir}/ocaml/%{module}
-%{_libdir}/ocaml/%{module}/*.cm[ixa]*
+%{_libdir}/ocaml/%{module}/*.cma
+%{_libdir}/ocaml/%{module}/*.cm[ix]
+%if %{with ocaml_opt}
+%{_libdir}/ocaml/%{module}/*.cmxa
 %{_libdir}/ocaml/%{module}/*.a
+%endif
 %{_libdir}/ocaml/site-lib/%{module}
