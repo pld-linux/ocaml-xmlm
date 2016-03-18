@@ -12,7 +12,7 @@
 Summary:	OCaml xml manipulation module
 Name:		ocaml-%{module}
 Version:	1.2.0
-Release:	3
+Release:	4
 License:	BSD
 Group:		Libraries
 Source0:	http://erratique.ch/software/xmlm/releases/%{module}-%{version}.tbz
