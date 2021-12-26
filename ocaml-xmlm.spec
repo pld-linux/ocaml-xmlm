@@ -25,6 +25,7 @@ BuildRequires:	ocaml-topkg >= 0.9.0
 BuildRequires:	ocaml-findlib-devel >= 1.4
 BuildRequires:	ocaml-ocamlbuild
 %requires_eq	ocaml-runtime
+Conflicts:	ocaml-xmlm-devel < 1.3.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
