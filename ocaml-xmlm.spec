@@ -14,7 +14,7 @@ Summary:	OCaml XML manipulation module
 Summary(pl.UTF-8):	Moduł OCamla do operacji na XML-u
 Name:		ocaml-%{module}
 Version:	1.3.0
-Release:	1
+Release:	2
 License:	ISC
 Group:		Libraries
 Source0:	https://erratique.ch/software/xmlm/releases/%{module}-%{version}.tbz
@@ -44,6 +44,7 @@ wykorzystującego xml-light, aby używał xmlm.
 Summary:	xmlm binding for OCaml - development part
 Summary(pl.UTF-8):	Wiązania xmlm dla OCamla - cześć programistyczna
 Group:		Development/Libraries
+Requires:	%{name} = %{version}-%{release}
 %requires_eq	ocaml
 
 %description devel
