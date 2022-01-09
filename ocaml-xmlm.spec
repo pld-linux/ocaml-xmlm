@@ -42,7 +42,7 @@ wykorzystującego xml-light, aby używał xmlm.
 
 %package devel
 Summary:	xmlm binding for OCaml - development part
-Summary(pl.UTF-8):	Wiązania xmlm dla OCamla - cześć programistyczna
+Summary(pl.UTF-8):	Wiązania xmlm dla OCamla - część programistyczna
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 %requires_eq	ocaml
